@@ -1,0 +1,12 @@
+const handleSubmit = async (e) => {
+    e.preventDefault()
+
+    const res = await fetch("http://localhost:5000/api/hotel/add",{
+        method:"POST",
+        headers: {"Context-Type": "application/json" },
+        body: JSON.stringify(formData)
+    })
+
+    const data = await res.json()
+    console.log(data)
+}
