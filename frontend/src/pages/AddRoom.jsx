@@ -3,7 +3,7 @@ const handleSubmit = async (e) => {
 
     const res = await fetch("http://localhost:5000/api/hotel/add",{
         method:"POST",
-        headers: {"Context-Type": "application/json" },
+        headers: {"Content-Type": "application/json" },
         body: JSON.stringify(formData)
     })
 
