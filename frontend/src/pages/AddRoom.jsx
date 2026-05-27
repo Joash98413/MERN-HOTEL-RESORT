@@ -10,3 +10,5 @@ const handleSubmit = async (e) => {
     const data = await res.json()
     console.log(data)
 }
+
+export default AddRoom
