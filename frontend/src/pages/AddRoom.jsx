@@ -6,7 +6,7 @@ const AddRoom = () => {
         price: "",
         description: ""
     })
-}
+
 
 const handleSubmit = async (e) => {
     e.preventDefault()
@@ -36,5 +36,6 @@ return(
     </div>
 )
 
+}
 
 export default AddRoom
