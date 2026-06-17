@@ -6,7 +6,8 @@ import ListHotel from './Pages/ListHotel'
 import Reservation from './Pages/Reservation'
 import Login from './Components/Login'
 import Dashboard from './Pages/Dashboard'
-// import { ToastContainer } from "react-toastify";
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 export const backendUrl = 'http://localhost:5000'
 
@@ -29,11 +30,12 @@ const App =() => {
 
     return(
         <BrowserRouter>
+            <ToastContainer />
     
-       {token && token.length > 0 ?(
-            <div className="flex w-full">
+       {token ? (
+            <div className="flex items-start min-h-screen">
                 <Sidebar setToken={setToken} />
-                <div className="w-[70%] ml-[max(5vw,25px)] my-8 text-black text-base">
+                <div className="flex-1 ml-[max(5vw,25px)] my-8 text-black text-base">
                     <Routes>
                          <Route path="/" element={<Navigate to="/dashboard" replace/>} />
                         <Route path="/dashboard" element={<Dashboard token={token} />} />
