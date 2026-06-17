@@ -5,6 +5,7 @@ import AddHotel from './Pages/AddHotel'
 import ListHotel from './Pages/ListHotel'
 import Reservation from './Pages/Reservation'
 import Login from './Components/Login'
+import Dashboard from './Pages/Dashboard'
 // import { ToastContainer } from "react-toastify";
 
 export const backendUrl = 'http://localhost:5000'
@@ -34,11 +35,12 @@ const App =() => {
                 <Sidebar setToken={setToken} />
                 <div className="w-[70%] ml-[max(5vw,25px)] my-8 text-black text-base">
                     <Routes>
-                         <Route path="/" element={<Navigate to="/add" replace/>} />
+                         <Route path="/" element={<Navigate to="/dashboard" replace/>} />
+                        <Route path="/dashboard" element={<Dashboard token={token} />} />
                         <Route path="/add" element={<AddHotel token={token} />} />
                         <Route path="/list" element={<ListHotel token={token} />} />
                         <Route path="/reservation" element={<Reservation token={token} />} />
-                        <Route path="*" element={<Navigate to="/add" replace/>} />
+                        <Route path="*" element={<Navigate to="/dashboard" replace/>} />
                         
 
                     </Routes>

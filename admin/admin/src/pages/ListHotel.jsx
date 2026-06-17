@@ -5,6 +5,7 @@ import axios from 'axios'
 
 const ListHotel = ({token}) => {
   const [list, setList] = useState([])
+  const [deletingId, setDeletingId] = useState('')
 
   const fetchRoomList = async () => {
     try{
@@ -20,6 +21,26 @@ const ListHotel = ({token}) => {
     } catch (error){
       console.log(error);
 
+    }
+  }
+
+  const handleDelete = async (id) => {
+    if (!id) return
+    const shouldDelete = window.confirm('Delete this room?')
+    if (!shouldDelete) return
+
+    setDeletingId(id)
+    try {
+      const response = await axios.post(`${backendUrl}/api/hotel/remove`, { id }, { headers: { token } })
+      if (response.data.success) {
+        setList((prev) => prev.filter((item) => (item._id || item.id) !== id))
+      } else {
+        console.log(response.data.message)
+      }
+    } catch (error) {
+      console.log(error)
+    } finally {
+      setDeletingId('')
     }
   }
   useEffect(()=> {
@@ -67,6 +88,13 @@ const ListHotel = ({token}) => {
               <div className='space-y-1'>
                 <p className='text-base font-semibold text-slate-900'>{item.name || 'Untitled room'}</p>
                 <p className='text-sm text-slate-500'>{item.description || 'No description available.'}</p>
+                <div className='flex flex-wrap gap-2 pt-2'>
+                  {item.amenities?.slice(0, 4).map((amenity, amenityIndex) => (
+                    <span key={amenityIndex} className='rounded-full bg-fuchsia-50 px-3 py-1 text-xs font-medium text-fuchsia-700'>
+                      {typeof amenity === 'string' ? amenity : amenity.label}
+                    </span>
+                  ))}
+                </div>
               </div>
 
               <div>
@@ -74,7 +102,11 @@ const ListHotel = ({token}) => {
               </div>
 
               <div className='flex justify-end'>
-                <button className='inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-red-100 bg-red-50 text-red-600 transition hover:bg-red-100'>
+                <button
+                  onClick={() => handleDelete(item._id || item.id)}
+                  disabled={deletingId === (item._id || item.id)}
+                  className='inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-red-100 bg-red-50 text-red-600 transition hover:bg-red-100 disabled:cursor-not-allowed disabled:opacity-50'
+                >
                   <MdDeleteForever size={20} />
                 </button>
               </div>

@@ -1,7 +1,7 @@
 import React from 'react'
 import {NavLink} from'react-router-dom'
 import { IoMdAddCircleOutline, IoIosLogOut } from "react-icons/io";
-import { MdFormatListBulletedAdd, MdChecklistRtl } from "react-icons/md";
+import { MdFormatListBulletedAdd, MdChecklistRtl, MdSpaceDashboard } from "react-icons/md";
 
 function Sidebar({ setToken })  {
   return (
@@ -10,6 +10,11 @@ function Sidebar({ setToken })  {
         <h1 className='text-[33px] font-bold'>Deluxe Hotel Resort</h1>
       </div>
       <div className='flex flex-col gap-4 pt-6'>
+        <NavLink to='/dashboard' className='flex items-center gap-3 px-4 py-3 border-b-2 border-gray-200 text-gray-700 hover:bg-fuchsia-500 hover:text-white'>
+         <MdSpaceDashboard className='text-[34px] text-black'/>
+         <p className='hidden md:block text-base'>Dashboard</p>
+        </NavLink>
+
         <NavLink to='/add' className='flex items-center gap-3 px-4 py-3 border-b-2 border-gray-200 text-gray-700 hover:bg-fuchsia-500 hover:text-white'>
          <IoMdAddCircleOutline className='text-[34px] text-black'/>
          <p className='hidden md:block text-base'>Add Rooms</p>
