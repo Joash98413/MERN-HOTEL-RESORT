@@ -16,7 +16,7 @@ const Footer = () => {
       <div className='max-w-6xl max-auto px-4 text-center mb-12'>
         <h2 className='text-3xl  md:text-4xl font-bold mb-4'>Sign Up For Exclusive Offers</h2>
 
-        <form onSubmit="{handleSubmit}" className='flex justify-center mt-6'>
+        <form onSubmit={handleSubmit} className='flex justify-center mt-6'>
           <div className='flex w-full max-w-md bg-gray-800 rounded-full overflow-hidden'>
           <input
             type='email'

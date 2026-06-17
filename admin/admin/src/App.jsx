@@ -1,0 +1,65 @@
+import { useState, useEffect } from "react";
+import {BrowserRouter, Routes, Route, Navigate} from 'react-router-dom'
+import Sidebar from'./Components/Sidebar'
+import AddHotel from './Pages/AddHotel'
+import ListHotel from './Pages/ListHotel'
+import Reservation from './Pages/Reservation'
+import Login from './Components/Login'
+// import { ToastContainer } from "react-toastify";
+
+export const backendUrl = 'http://localhost:5000'
+
+const App =() => {
+    const [token, setToken] = useState('')
+    console.log("App render, token state:", token)
+
+    useEffect(() => {
+        const savedToken = localStorage.getItem('token')
+        if(savedToken) setToken(savedToken)
+
+
+    },[])
+
+    useEffect(() => {
+        if(token) localStorage.setItem('token', token)
+            else localStorage.removeItem('token')
+    },[token])
+
+
+    return(
+        <BrowserRouter>
+    
+       {token && token.length > 0 ?(
+            <div className="flex w-full">
+                <Sidebar setToken={setToken} />
+                <div className="w-[70%] ml-[max(5vw,25px)] my-8 text-black text-base">
+                    <Routes>
+                         <Route path="/" element={<Navigate to="/add" replace/>} />
+                        <Route path="/add" element={<AddHotel token={token} />} />
+                        <Route path="/list" element={<ListHotel token={token} />} />
+                        <Route path="/reservation" element={<Reservation token={token} />} />
+                        <Route path="*" element={<Navigate to="/add" replace/>} />
+                        
+
+                    </Routes>
+
+                </div>
+
+            </div>
+
+        ) : (
+            <Login setToken={setToken} />
+
+        )}
+
+    </BrowserRouter>
+        
+    )
+
+    } 
+
+    export default App
+
+
+      
+       

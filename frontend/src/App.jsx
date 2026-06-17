@@ -3,8 +3,12 @@ import Navbar from './components/Navbar'
 import Homepage from './pages/Homepage'
 import HotelDetails from './pages/HotelDetails'
 import Footer from './components/Footer'
-import AddRoom from './pages/AddRoom'
+import AddHotel from './pages/AddHotel'
+
+ export const backendUrl ='http://localhost:5000'
 const App = () => {
+
+ 
   return (
   
 
@@ -13,8 +17,8 @@ const App = () => {
      <Navbar />
      <Routes>
       <Route path='/' element={<Homepage />} />
-      <Route path='/rooms/:id' element={<HotelDetails />} />
-      <Route path='/add-room' element={<AddRoom/>} />
+      <Route path='/hotel/:id' element={<HotelDetails />} />
+      <Route path='/add-hotel' element={<AddHotel/>} />
      </Routes>
      <Footer />
     </div>
