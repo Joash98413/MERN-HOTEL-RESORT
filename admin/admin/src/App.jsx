@@ -41,7 +41,6 @@ const App =() => {
                         <Route path="/list" element={<ListHotel token={token} />} />
                         <Route path="/reservation" element={<Reservation token={token} />} />
                         <Route path="*" element={<Navigate to="/dashboard" replace/>} />
-                        
 
                     </Routes>
 
